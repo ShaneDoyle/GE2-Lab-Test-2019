@@ -21,6 +21,6 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, target.transform.position,0.08f);
+        transform.position = Vector3.Lerp(transform.position, target.transform.position,0.05f);
     }
 }

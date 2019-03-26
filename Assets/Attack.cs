@@ -10,6 +10,7 @@ public class Attack : MonoBehaviour
     public GameObject Bullet;
     public GameObject target; // = Vector3.zero;
 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,16 +31,21 @@ public class Attack : MonoBehaviour
     //Increase Tiberium coroutine. Increments and spawns fighers.
     IEnumerator Shoot()
     {
-        //Wait 1 second.
+        //Create bullet with appropriate settings.
         Bullet = GameObject.Instantiate<GameObject>(Bullet);
         Bullet.transform.position = transform.position; //Spawn at base.
-        Bullet.name = "Bullet"; //Give name for niceness.#
+        Bullet.name = "Bullet"; //Give name for niceness.
         Bullet bullet = Bullet.GetComponent<Bullet>();
         bullet.target = target;
 
+        //Reduce "ammo" by 1.
+        Fighter fighter = GetComponent<Fighter>();
+        fighter.tiberium--;
 
 
-        //Wait 1 second.
-        yield return new WaitForSeconds(0.2f);
+
+        //Wait 0.2 seconds.
+        yield return new WaitForSeconds(0.1f);
+        AttackCooldown = false;
     }
 }

@@ -10,7 +10,7 @@ public class Fighter : MonoBehaviour
     public GameObject[] EnemyBases = new GameObject[4];
     public GameObject Bullet;
 
-    private float tiberium = 7f;
+    public float tiberium = 7f;
 
     //Seek seek;
 
@@ -50,20 +50,48 @@ public class Fighter : MonoBehaviour
         }
 
         //Check distance between the fighter and the target. If close enough, change to attack mode.
-        if(Vector3.Distance(transform.position, Target.transform.position) < 15)
+        if (Vector3.Distance(transform.position, Target.transform.position) < 15 && tiberium > 0)
         {
             //Arrive.enabled = false;
             arrive.targetPosition = Target.transform.position;
             arrive.enabled = false;
             boid.enabled = false;
 
-            attack.enabled = true;
-            attack.target = Target;
-            attack.Fighter = this.gameObject;
-           // boid.force = new Vector3(0, 0, 0);
-           // boid
+            if (tiberium > 0)
+            {
+                attack.enabled = true;
+                attack.target = Target;
+                attack.Fighter = this.gameObject;
+            }
+            else
+            {
+                attack.enabled = false;
+            }
+        }
+
+        //When out of ammo, return to base.
+        if (tiberium == 0)
+        { 
+
+            arrive.targetPosition = Base.transform.position;
+            arrive.enabled = true;
+            boid.enabled = true;
+            attack.enabled = false;
+
+            if(Vector3.Distance(transform.position, Base.transform.position) < 1)
+            {
+
+            }
 
         }
+
+
+
+
+        // boid.force = new Vector3(0, 0, 0);
+        // boid
+
+
 
     }
 
