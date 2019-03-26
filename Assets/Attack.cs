@@ -11,7 +11,7 @@ public class Attack : MonoBehaviour
     public GameObject target; // = Vector3.zero;
 
 
-    // Start is called before the first frame update
+    //Start is called before the first frame update.
     void Start()
     {
         
@@ -25,7 +25,6 @@ public class Attack : MonoBehaviour
             AttackCooldown = true;
             StartCoroutine("Shoot");
         }
-
     }
 
     //Increase Tiberium coroutine. Increments and spawns fighers.
@@ -42,8 +41,6 @@ public class Attack : MonoBehaviour
         //Reduce "ammo" by 1.
         Fighter fighter = GetComponent<Fighter>();
         fighter.tiberium--;
-
-
 
         //Wait 0.2 seconds.
         yield return new WaitForSeconds(0.1f);

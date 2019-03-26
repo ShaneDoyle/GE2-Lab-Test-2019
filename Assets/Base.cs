@@ -5,10 +5,9 @@ using UnityEngine;
 
 public class Base : MonoBehaviour
 {
+    //Variables
     public float tiberium = 0;
     public int tiberiumCap = 10;
-    public int fighterWaiting = 0;
-
     public TextMeshPro text;
     public GameObject fighterPrefab;
 
@@ -20,7 +19,7 @@ public class Base : MonoBehaviour
 
     private bool addTiberium = true;
 
-    // Start is called before the first frame update
+    //Start is called before the first frame update.
     void Start()
     {
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
@@ -28,18 +27,15 @@ public class Base : MonoBehaviour
             r.material.color = Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1, 1);
             colorStart = r.material.color;
         }
-
-
     }
 
-    // Update is called once per frame
+    //Update is called once per frame.
     void Update()
     {
+        //Display tiberium amount.
         text.text = "" + tiberium;
 
-
-
-
+        //Increase tiberium every second.
         if (addTiberium == true)
         {
             addTiberium = false;
@@ -51,18 +47,20 @@ public class Base : MonoBehaviour
     //Spawn fighter function.
     void SpawnFighter()
     {
+        //Spawn fighter at base.
         Fighter = GameObject.Instantiate<GameObject>(fighterPrefab);
-        Fighter.transform.position = transform.position; //Spawn at base.
+        Fighter.transform.position = transform.position;
         Fighter.name = "Fighter"; //Give name for niceness.
 
+        //Assign the base it spawned to as its home base.
         Fighter script = Fighter.GetComponent<Fighter>();
         script.Base = this.gameObject;
     }
 
-    //Increase Tiberium coroutine. Increments and spawns fighers.
+    //Increase Tiberium coroutine. Also handles the spawning of new fighters.
     IEnumerator IncreaseTiberium()
     {
-        //Wait 1 second.
+        //Wait 1 second to increase.
         yield return new WaitForSeconds(1);
         if (tiberium >= tiberiumCap - 1)
         {

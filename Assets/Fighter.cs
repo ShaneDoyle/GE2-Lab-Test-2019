@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class Fighter : MonoBehaviour
 {
-
+    //Public Variables
     public GameObject Base;
     public GameObject Target;
     public GameObject[] EnemyBases = new GameObject[4];
     public GameObject Bullet;
-
     public float tiberium = 7f;
 
-    //Seek seek;
+    //Hold scripts that the fight uses.
+    Seek seek;
+    Arrive arrive;
+    Attack attack;
+    Boid boid;
 
     // Start is called before the first frame update
     void Start()
     {
-        //Get scripts of this fighter.
-        //Seek seek = GetComponent<Seek>();
-
+        //Assign scripts of this fighter.
+         seek = GetComponent<Seek>();
+         arrive = GetComponent<Arrive>();
+         attack = GetComponent<Attack>();
+         boid = GetComponent<Boid>();
 
         //Get material from base.
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
@@ -28,7 +33,6 @@ public class Fighter : MonoBehaviour
             r.material = m_Material;
         }
 
-
         //Pick a target.
         ChooseTarget();
     }
@@ -36,11 +40,7 @@ public class Fighter : MonoBehaviour
     //Update is called once per frame. Manages the different behaviours that the fighter can do.
     void Update()
     {
-        Seek seek = GetComponent<Seek>();
-        Arrive arrive = GetComponent<Arrive>();
-        Attack attack = GetComponent<Attack>();
-        Boid boid = GetComponent<Boid>();
-
+        //If no target, choose a new one.
         if(Target == null)
         {
             ChooseTarget();
@@ -50,27 +50,27 @@ public class Fighter : MonoBehaviour
         if (tiberium > 0)
         {
             arrive.targetPosition = Target.transform.position;
-            //arrive.slowingDistance = 30f;
             arrive.enabled = true;
         }
 
         //Check distance between the fighter and the target. If close enough, change to attack mode.
         if (Vector3.Distance(transform.position, Target.transform.position) < 15 && tiberium > 0)
         {
-            //Arrive.enabled = false;
             arrive.targetPosition = Target.transform.position;
-            arrive.slowingDistance = 25f;
+            arrive.slowingDistance = 15f;
             arrive.enabled = false;
             boid.enabled = false;
 
+            //If fighter has ammo and is in range, attack.
             if (tiberium > 0)
             {
+                //Attack mode.
                 attack.enabled = true;
                 attack.target = Target;
                 attack.Bullet = Bullet;
                 attack.Fighter = this.gameObject;
 
-                //Stop speed.
+                //Resets speed, fighter looks smoother returning.
                 boid.velocity = new Vector3(0, 0, 0);
             }
             else
@@ -83,7 +83,6 @@ public class Fighter : MonoBehaviour
         if (tiberium == 0)
         {
             arrive.targetPosition = Base.transform.position;
-            arrive.slowingDistance = 15f;
             arrive.enabled = true;
             boid.enabled = true;
             attack.enabled = false;
@@ -92,7 +91,6 @@ public class Fighter : MonoBehaviour
             if (Vector3.Distance(transform.position, Base.transform.position) < 1)
             {
                 //Reduce "ammo" by 1.
-
                 Base mybase = Base.GetComponent<Base>();
                 if (mybase.tiberium >= 7 && tiberium == 0)
                 {
