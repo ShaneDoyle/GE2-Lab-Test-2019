@@ -31,7 +31,9 @@ public class Fighter : MonoBehaviour
     {
         if(Target != null)
         {
-
+            Seek seek = GetComponent<Seek>();
+            seek.enabled = true;
+            seek.target = Target.transform.position;
         }
     }
 

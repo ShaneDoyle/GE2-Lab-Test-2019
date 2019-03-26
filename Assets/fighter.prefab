@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5524477041282564758}
   - component: {fileID: 5524477041282564749}
   - component: {fileID: 7821467165691125419}
+  - component: {fileID: 1845171041866256058}
+  - component: {fileID: 8294284745753684017}
   m_Layer: 9
   m_Name: fighter
   m_TagString: Untagged
@@ -149,6 +151,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111ae51f695f86a40a20de6492ea65c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Base: {fileID: 0}
+  Target: {fileID: 0}
+  EnemyBases:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &1845171041866256058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524477041282564756}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24ccff820858ade47b95c610e3bd8f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weight: 1
+  force: {x: 0, y: 0, z: 0}
+  boid: {fileID: 0}
+  targetGameObject: {fileID: 0}
+  target: {x: 0, y: 0, z: 0}
+--- !u!114 &8294284745753684017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5524477041282564756}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b7592bd6412b4142ac47d6f85922a78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: {x: 0, y: 0, z: 0}
+  acceleration: {x: 0, y: 0, z: 0}
+  velocity: {x: 0, y: 0, z: 0}
+  mass: 1
+  damping: 0.01
+  banking: 0.1
+  maxSpeed: 5
+  maxForce: 10
 --- !u!1 &8813897858953667768
 GameObject:
   m_ObjectHideFlags: 0
