@@ -8,12 +8,19 @@ public class Fighter : MonoBehaviour
     public GameObject Base;
     public GameObject Target;
     public GameObject[] EnemyBases = new GameObject[4];
+    public GameObject Bullet;
 
+    private float tiberium = 7f;
 
+    //Seek seek;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Get scripts of this fighter.
+        //Seek seek = GetComponent<Seek>();
+
+
         //Get material from base.
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
         {
@@ -29,12 +36,35 @@ public class Fighter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Target != null)
+        Seek seek = GetComponent<Seek>();
+        Arrive arrive = GetComponent<Arrive>();
+        Attack attack = GetComponent<Attack>();
+        Boid boid = GetComponent<Boid>();
+
+        //If fighter has target, arrive to it. Used to arrive to enemy bases.
+        if (Target != null)
         {
-            Seek seek = GetComponent<Seek>();
-            seek.enabled = true;
-            seek.target = Target.transform.position;
+            arrive.targetPosition = Target.transform.position;
+            //arrive.slowingDistance = 30f;
+            arrive.enabled = true;
         }
+
+        //Check distance between the fighter and the target. If close enough, change to attack mode.
+        if(Vector3.Distance(transform.position, Target.transform.position) < 15)
+        {
+            //Arrive.enabled = false;
+            arrive.targetPosition = Target.transform.position;
+            arrive.enabled = false;
+            boid.enabled = false;
+
+            attack.enabled = true;
+            attack.target = Target;
+            attack.Fighter = this.gameObject;
+           // boid.force = new Vector3(0, 0, 0);
+           // boid
+
+        }
+
     }
 
     void ChooseTarget()

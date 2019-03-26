@@ -5,6 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 5.0f;
+    public GameObject target;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,5 +21,6 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, target.transform.position,0.08f);
     }
 }
