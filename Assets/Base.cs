@@ -6,6 +6,7 @@ using UnityEngine;
 public class Base : MonoBehaviour
 {
     public float tiberium = 0;
+    public int tiberiumCap = 10;
 
     public TextMeshPro text;
     public GameObject fighterPrefab;
@@ -13,9 +14,10 @@ public class Base : MonoBehaviour
 
     //Private varaibles.
     private GameObject Fighter;
-
     private Renderer rend;
     private Color colorStart;
+
+    private bool addTiberium = true;
 
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,6 @@ public class Base : MonoBehaviour
         {
             r.material.color = Color.HSVToRGB(Random.Range(0.0f, 1.0f), 1, 1);
             colorStart = r.material.color;
-            Debug.Log("Renderer complete");
         }
 
 
@@ -35,25 +36,43 @@ public class Base : MonoBehaviour
     {
         text.text = "" + tiberium;
 
-        if(tiberium == 10)
+
+
+        if (addTiberium == true)
         {
-
-            StartCoroutine("SpawnFighter");
+            addTiberium = false;
+            StartCoroutine("IncreaseTiberium");
         }
-
-        StartCoroutine("IncreaseTiberium");
     }
 
 
-    IEnumerator SpawnFighter()
+    //Spawn fighter function.
+    void SpawnFighter()
     {
         //Wait 1 second.
-        yield return new WaitForSeconds(1);
         Fighter = GameObject.Instantiate<GameObject>(fighterPrefab);
         Fighter.transform.position = transform.position; //Spawn at base.
+        Fighter.name = "Fighter"; //Give name for niceness.
 
         Fighter script = Fighter.GetComponent<Fighter>();
         script.Base = this.gameObject;
+    }
+
+    //Increase Tiberium coroutine. Increments and spawns fighers.
+    IEnumerator IncreaseTiberium()
+    {
+        //Wait 1 second.
+        yield return new WaitForSeconds(1);
+        if (tiberium == tiberiumCap - 1)
+        {
+            tiberium = 0;
+            SpawnFighter();
+        }
+        else
+        {
+            tiberium++;
+        }
+        addTiberium = true;
     }
 }
 

@@ -806,7 +806,7 @@ GameObject:
   - component: {fileID: 748959472}
   m_Layer: 10
   m_Name: base (1)
-  m_TagString: Untagged
+  m_TagString: base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -824,6 +824,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiberium: 5
+  tiberiumCap: 10
   text: {fileID: 197494989}
   fighterPrefab: {fileID: 5524477041282564756, guid: 5102c343c1a0cad468bdf261e0a627c7,
     type: 3}
@@ -1350,7 +1351,7 @@ GameObject:
   - component: {fileID: 947435940}
   m_Layer: 10
   m_Name: base (2)
-  m_TagString: Untagged
+  m_TagString: base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1368,6 +1369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiberium: 5
+  tiberiumCap: 10
   text: {fileID: 632246730}
   fighterPrefab: {fileID: 5524477041282564756, guid: 5102c343c1a0cad468bdf261e0a627c7,
     type: 3}
@@ -1476,7 +1478,7 @@ GameObject:
   - component: {fileID: 1363778834}
   m_Layer: 10
   m_Name: base
-  m_TagString: Untagged
+  m_TagString: base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1567,6 +1569,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiberium: 5
+  tiberiumCap: 10
   text: {fileID: 782841948}
   fighterPrefab: {fileID: 5524477041282564756, guid: 5102c343c1a0cad468bdf261e0a627c7,
     type: 3}
@@ -1602,7 +1605,7 @@ GameObject:
   - component: {fileID: 1606550180}
   m_Layer: 10
   m_Name: base (3)
-  m_TagString: Untagged
+  m_TagString: base
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1620,6 +1623,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiberium: 5
+  tiberiumCap: 10
   text: {fileID: 862900976}
   fighterPrefab: {fileID: 5524477041282564756, guid: 5102c343c1a0cad468bdf261e0a627c7,
     type: 3}
