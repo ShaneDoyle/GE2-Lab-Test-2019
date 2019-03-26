@@ -33,7 +33,7 @@ public class Fighter : MonoBehaviour
         ChooseTarget();
     }
 
-    // Update is called once per frame
+    //Update is called once per frame. Manages the different behaviours that the fighter can do.
     void Update()
     {
         Seek seek = GetComponent<Seek>();
@@ -41,8 +41,13 @@ public class Fighter : MonoBehaviour
         Attack attack = GetComponent<Attack>();
         Boid boid = GetComponent<Boid>();
 
+        if(Target == null)
+        {
+            ChooseTarget();
+        }
+
         //If fighter has target, arrive to it. Used to arrive to enemy bases.
-        if (Target != null)
+        if (tiberium > 0)
         {
             arrive.targetPosition = Target.transform.position;
             //arrive.slowingDistance = 30f;
@@ -71,28 +76,35 @@ public class Fighter : MonoBehaviour
 
         //When out of ammo, return to base.
         if (tiberium == 0)
-        { 
+        {
 
             arrive.targetPosition = Base.transform.position;
             arrive.enabled = true;
             boid.enabled = true;
             attack.enabled = false;
 
-            if(Vector3.Distance(transform.position, Base.transform.position) < 1)
+            //If at base, reload.
+            if (Vector3.Distance(transform.position, Base.transform.position) < 1)
             {
+                //Reduce "ammo" by 1.
 
+                Base mybase = Base.GetComponent<Base>();
+                if (mybase.tiberium >= 7 && tiberium == 0)
+                {
+                    Reload();
+                }
             }
 
         }
+    }
 
-
-
-
-        // boid.force = new Vector3(0, 0, 0);
-        // boid
-
-
-
+    //Reloads and when done, refreshes a new target.
+    void Reload()
+    {
+        Base mybase = Base.GetComponent<Base>();
+        mybase.tiberium -= 7;
+        tiberium += 7;
+        ChooseTarget();
     }
 
     void ChooseTarget()

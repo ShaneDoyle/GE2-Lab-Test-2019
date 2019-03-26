@@ -37,6 +37,7 @@ public class Attack : MonoBehaviour
         Bullet.name = "Bullet"; //Give name for niceness.
         Bullet bullet = Bullet.GetComponent<Bullet>();
         bullet.target = target;
+        bullet.Fighter = Fighter;
 
         //Reduce "ammo" by 1.
         Fighter fighter = GetComponent<Fighter>();

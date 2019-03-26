@@ -6,10 +6,18 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 5.0f;
     public GameObject target;
+    public GameObject Fighter; //Fighter who shot the bullet.
+
     // Start is called before the first frame update
     void Start()
     {
         Invoke("KillMe", 10);
+        //Get material from base.
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            Material m_Material = Fighter.GetComponent<Renderer>().material;
+            r.material = m_Material;
+        }
     }
 
     public void KillMe()
@@ -22,5 +30,11 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
         transform.position = Vector3.Lerp(transform.position, target.transform.position,0.05f);
+
+        //When "hit" a base.
+        if(Vector3.Distance(transform.position, target.transform.position) < 0.5f)
+        {
+             Base targ = Target.GetComponent<Base>();
+        }
     }
 }
