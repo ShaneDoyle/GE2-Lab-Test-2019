@@ -7,7 +7,7 @@ using UnityEngine;
 public class Arrive: SteeringBehaviour
 {
     public Vector3 targetPosition = Vector3.zero;
-    public float slowingDistance = 35.0f;
+    public float slowingDistance = 10.0f;
 
     public GameObject targetGameObject = null;
         

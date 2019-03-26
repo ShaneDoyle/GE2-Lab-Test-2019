@@ -59,6 +59,7 @@ public class Fighter : MonoBehaviour
         {
             //Arrive.enabled = false;
             arrive.targetPosition = Target.transform.position;
+            arrive.slowingDistance = 25f;
             arrive.enabled = false;
             boid.enabled = false;
 
@@ -66,7 +67,11 @@ public class Fighter : MonoBehaviour
             {
                 attack.enabled = true;
                 attack.target = Target;
+                attack.Bullet = Bullet;
                 attack.Fighter = this.gameObject;
+
+                //Stop speed.
+                boid.velocity = new Vector3(0, 0, 0);
             }
             else
             {
@@ -77,8 +82,8 @@ public class Fighter : MonoBehaviour
         //When out of ammo, return to base.
         if (tiberium == 0)
         {
-
             arrive.targetPosition = Base.transform.position;
+            arrive.slowingDistance = 15f;
             arrive.enabled = true;
             boid.enabled = true;
             attack.enabled = false;

@@ -160,7 +160,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  Bullet: {fileID: 0}
+  Bullet: {fileID: 7390136343811685161, guid: ae30e55a6b7c9df4e827f669f7fa6235, type: 3}
+  tiberium: 7
 --- !u!114 &1845171041866256058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -210,7 +211,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 054f96098285b954d80ca8ac53aef755, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Fighter: {fileID: 0}
   Bullet: {fileID: 7390136343811685161, guid: ae30e55a6b7c9df4e827f669f7fa6235, type: 3}
+  target: {fileID: 0}
 --- !u!114 &4518556832134814313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -227,7 +230,7 @@ MonoBehaviour:
   force: {x: 0, y: 0, z: 0}
   boid: {fileID: 0}
   targetPosition: {x: 0, y: 0, z: 0}
-  slowingDistance: 15
+  slowingDistance: 25
   targetGameObject: {fileID: 0}
 --- !u!1 &8813897858953667768
 GameObject:

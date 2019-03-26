@@ -7,6 +7,7 @@ public class Base : MonoBehaviour
 {
     public float tiberium = 0;
     public int tiberiumCap = 10;
+    public int fighterWaiting = 0;
 
     public TextMeshPro text;
     public GameObject fighterPrefab;
@@ -38,6 +39,7 @@ public class Base : MonoBehaviour
 
 
 
+
         if (addTiberium == true)
         {
             addTiberium = false;
@@ -49,7 +51,6 @@ public class Base : MonoBehaviour
     //Spawn fighter function.
     void SpawnFighter()
     {
-        //Wait 1 second.
         Fighter = GameObject.Instantiate<GameObject>(fighterPrefab);
         Fighter.transform.position = transform.position; //Spawn at base.
         Fighter.name = "Fighter"; //Give name for niceness.
@@ -63,9 +64,9 @@ public class Base : MonoBehaviour
     {
         //Wait 1 second.
         yield return new WaitForSeconds(1);
-        if (tiberium == tiberiumCap - 1)
+        if (tiberium >= tiberiumCap - 1)
         {
-            tiberium = 0;
+            tiberium -= 9;
             SpawnFighter();
         }
         else

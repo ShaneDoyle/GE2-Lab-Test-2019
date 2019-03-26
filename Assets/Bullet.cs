@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("KillMe", 10);
+        //Invoke("KillMe", 10);
         //Get material from base.
         foreach (Renderer r in GetComponentsInChildren<Renderer>())
         {
@@ -29,12 +29,14 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         transform.Translate(0, 0, speed * Time.deltaTime);
-        transform.position = Vector3.Lerp(transform.position, target.transform.position,0.05f);
+        transform.position = Vector3.Lerp(transform.position, target.transform.position,0.06f);
 
         //When "hit" a base.
-        if(Vector3.Distance(transform.position, target.transform.position) < 0.5f)
+        if(Vector3.Distance(transform.position, target.transform.position) < 3f)
         {
-             Base targ = Target.GetComponent<Base>();
+            Base targetbase = target.GetComponent<Base>();
+            targetbase.tiberium -= 0.5f;
+            Destroy(this.gameObject);
         }
     }
 }
